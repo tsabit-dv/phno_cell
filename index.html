@@ -1,0 +1,185 @@
+<html>
+ <head>
+  <title>
+   Chat List - Dark Mode
+  </title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+  <style>
+   body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #121212;
+            color: #e0e0e0;
+        }
+        .header {
+            background: linear-gradient(to right, #333, #444);
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid #444;
+        }
+        .header .icon {
+            color: #e0e0e0;
+            font-size: 24px;
+        }
+        .header .icon.active {
+            color: #333;
+            background-color: #e0e0e0;
+            border-radius: 50%;
+            padding: 5px;
+        }
+        .search-bar {
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            background-color: #333;
+            border-bottom: 1px solid #444;
+        }
+        .search-bar input {
+            border: none;
+            outline: none;
+            flex: 1;
+            padding: 10px;
+            font-size: 16px;
+            background-color: #444;
+            color: #e0e0e0;
+        }
+        .search-bar .fa-search {
+            color: #aaa;
+            font-size: 20px;
+            margin-right: 10px;
+        }
+        .chat-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .chat-list li {
+            display: flex;
+            align-items: center;
+            padding: 15px;
+            border-bottom: 1px solid #444;
+            background-color: #333;
+        }
+        .chat-list li img {
+            border-radius: 50%;
+            margin-right: 15px;
+        }
+        .chat-list li .name {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        .chat-list li .message {
+            color: #aaa;
+        }
+        .popup {
+            display: none;
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #333;
+            color: #e0e0e0;
+            padding: 10px 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        }
+  </style>
+ </head>
+ <body>
+  <div class="header">
+   <i class="fas fa-user icon active">
+   </i>
+   <i class="fas fa-users icon">
+   </i>
+   <i class="fas fa-search icon">
+   </i>
+  </div>
+  <ul class="chat-list">
+   <li>
+    <img alt="Avatar of Ben" height="50" src="https://cdn.vectorstock.com/i/500p/66/13/default-avatar-profile-icon-social-media-user-vector-49816613.jpg" width="50"/>
+    <div>
+     <div class="name">
+      Pemadam Kebakaran
+     </div>
+     <div class="message" data-number="1234567890">
+      Tap to Direct Cell !!!
+     </div>
+    </div>
+   </li>
+   <li>
+    <img alt="Avatar of Michael" height="50" src="https://cdn.vectorstock.com/i/500p/66/13/default-avatar-profile-icon-social-media-user-vector-49816613.jpg" width="50"/>
+    <div>
+     <div class="name">
+      RSUD Setempat
+     </div>
+     <div class="message" data-number="0987654321">
+      Tap to Direct Cell !!!
+     </div>
+    </div>
+   </li>
+   <li>
+    <img alt="Avatar of Tom" height="50" src="https://cdn.vectorstock.com/i/500p/66/13/default-avatar-profile-icon-social-media-user-vector-49816613.jpg" width="50"/>
+    <div>
+     <div class="name">
+      Police
+     </div>
+     <div class="message" data-number="1122334455">
+      Tap to Direct Cell !!!
+     </div>
+    </div>
+   </li>
+   <li>
+    <img alt="Avatar of James" height="50" src="https://cdn.vectorstock.com/i/500p/66/13/default-avatar-profile-icon-social-media-user-vector-49816613.jpg" width="50"/>
+    <div>
+     <div class="name">
+      Basarnas Team
+     </div>
+     <div class="message" data-number="5566778899">
+      Tap to Direct Cell !!!
+     </div>
+    </div>
+   </li>
+   <li>
+    <img alt="Avatar of Ben" height="50" src="https://cdn.vectorstock.com/i/500p/66/13/default-avatar-profile-icon-social-media-user-vector-49816613.jpg" width="50"/>
+    <div>
+     <div class="name">
+      Ambulance
+     </div>
+     <div class="message" data-number="1234567890">
+      Tap to Direct Cell !!!
+     </div>
+    </div>
+   </li>
+  </ul>
+  <div class="popup" id="popup">
+   Nomor berhasil di salin
+  </div>
+  <script>
+   document.querySelectorAll('.message').forEach(function(message) {
+            message.addEventListener('mousedown', function(event) {
+                let timeout = setTimeout(function() {
+                    let number = message.getAttribute('data-number');
+                    navigator.clipboard.writeText(number).then(function() {
+                        let popup = document.getElementById('popup');
+                        popup.style.display = 'block';
+                        setTimeout(function() {
+                            popup.style.display = 'none';
+                        }, 2000);
+                    });
+                }, 3000);
+
+                message.addEventListener('mouseup', function() {
+                    clearTimeout(timeout);
+                });
+
+                message.addEventListener('mouseleave', function() {
+                    clearTimeout(timeout);
+                });
+            });
+        });
+  </script>
+ </body>
+</html>
